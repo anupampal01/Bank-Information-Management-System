@@ -8,8 +8,18 @@ connectDB();
 
 const app = express();
 
-app.use(cors());
+
+// Allow Netlify and local development
+app.use(cors({
+  origin: [
+    "https://bank-information-management-system.netlify.app",
+    "http://localhost:5173"
+  ],
+  credentials: true
+}));
 app.use(express.json());
+
+
 
 app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/banks", require("./routes/bankRoutes"));
